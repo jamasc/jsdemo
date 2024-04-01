@@ -1,27 +1,31 @@
-function addRecommendation() {
-  // Get the message of the new recommendation
-  let recommendation = document.getElementById("new_recommendation");
-  // If the user has left a recommendation, display a pop-up
-  if (recommendation.value != null && recommendation.value.trim() != "") {
-    console.log("New recommendation added");
-    //Call showPopup here
-    showPopup(true);
-    // Create a new 'recommendation' element and set it's value to the user's message
-    var element = document.createElement("div");
-    element.setAttribute("class","recommendation");
-    element.innerHTML = "\<span\>&#8220;\</span\>" + recommendation.value + "\<span\>&#8221;\</span\>";
-    // Add this element to the end of the list of recommendations
-    document.getElementById("all_recommendations").appendChild(element); 
-    
-    // Reset the value of the textarea
-    recommendation.value = "";
+class ValueDisplay {
+  // Constructor to initialize properties
+  constructor(...args) {
+    this.args = args;
+  }
+
+  displayProperties() {
+    document.getElementById("display").innerHTML = `
+      <p>Property 1: ${this.property1}</p>
+      <p>Property 2: ${this.property2}</p>
+    `;
+  }
+  
+  // Method to execute when div is clicked
+  doSomething() {
+    console.log("Div clicked! Do something...");
   }
 }
 
-function showPopup(bool) {
-  if (bool) {
-    document.getElementById('popup').style.visibility = 'visible'
-  } else {
-    document.getElementById('popup').style.visibility = 'hidden'
-  }
-}
+// Create an instance of the class
+const myInstance = new MyClass("Value 1", "Value 2");
+
+// Call the method to display properties when the page loads
+window.onload = function() {
+  myInstance.displayProperties();
+  
+  // Add click event listener to the div
+  document.getElementById("display").addEventListener("click", function() {
+    myInstance.doSomething();
+  });
+};
